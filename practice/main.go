@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 
 	"github.com/go-practice/bank"
+	"github.com/go-practice/basics"
 	"github.com/go-practice/car"
 	"github.com/go-practice/shapes"
 )
@@ -29,4 +32,18 @@ func main() {
 
 	account1.CheckBalance()
 	account1.WithDraw(400)
+
+	// Variadic function usage
+	shapes.Sum(1, 5, 2, 5, 1)
+
+	// Anonymous functions
+	basics.Anonym()
+
+	// Closures 1
+	basics.Closure1()
+
+	// Closures 2: HTTP middleware
+	http.Handle("/", basics.Logger(http.HandlerFunc(basics.MainHandler)))
+	log.Println("Server starting on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
